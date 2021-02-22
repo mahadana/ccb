@@ -1,0 +1,172 @@
+@font-face {
+  font-family: "Alegreya X Sans SC";
+  src: url("fonts/AlegreyaXSansSC-Bold.woff2") format("woff2"),
+    url("fonts/AlegreyaXSansSC-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gentium Incantation";
+  src: url("fonts/GentiumIncantation-Regular.woff2") format("woff2"),
+    url("fonts/GentiumIncantation-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gentium Incantation";
+  src: url("fonts/GentiumIncantation-Italic.woff2") format("woff2"),
+    url("fonts/GentiumIncantation-Italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  src: url("fonts/Ubuntu-X-Medium.woff2") format("woff2"),
+    url("fonts/Ubuntu-X-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  src: url("fonts/Ubuntu-L.woff2") format("woff2"),
+    url("fonts/Ubuntu-L.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 29.2em;
+  padding: 1em;
+  font-family: "Gentium Incantation";
+  font-size: 20px;
+}
+
+chant {
+  display: block;
+}
+
+chant h1,
+chant h2,
+chant h3,
+chant h4,
+chant h5,
+chant h6 {
+  font-family: "Ubuntu";
+  letter-spacing: 0.01em;
+}
+
+chant h1,
+chant h2,
+chant h3 {
+  padding-bottom: 0.1em;
+  border-bottom: 1px solid #aaa;
+}
+
+chant h2,
+chant h3 {
+  margin-top: 2em;
+}
+
+chant group,
+chant group verse {
+  display: block;
+}
+
+chant group {
+  margin: 0.75em 0;
+}
+
+chant verse {
+  line-height: 1.8em;
+}
+
+chant[mixed] group[en],
+chant[mixed] group verse[en] {
+  margin-left: 1.8em;
+  font-style: italic;
+}
+
+chant group verse[leader] {
+  margin-left: 1.8em;
+}
+
+chant grid {
+  display: table;
+  margin: 1em 0;
+}
+
+chant grid row {
+  display: table-row;
+}
+
+chant grid row:not(:last-child) verse {
+  padding-bottom: 0.5em;
+}
+
+chant grid verse {
+  display: table-cell;
+}
+
+chant grid verse:not(:last-child) {
+  padding-right: 1em;
+}
+
+chant grid verse[en] {
+  font-style: italic;
+}
+
+chant u {
+  display: inline-block;
+}
+
+chant aside {
+  margin-top: 1em;
+  margin-left: 2.6em;
+  margin-right: 1.8em;
+  font-family: "Alegreya X Sans SC";
+  font-weight: bold;
+  font-size: 0.9em;
+  letter-spacing: 0.03em;
+  line-height: 1.5em;
+  color: #888;
+  text-indent: -0.6em;
+}
+
+chant aside:before {
+  content: "[ ";
+}
+
+chant aside:after {
+  content: " ]";
+}
+
+body.chant-onefile h1 {
+  text-align: center;
+  padding: 1.5em;
+  margin: 2em 0 1em;
+  font-size: 1.7em;
+  background-color: #ddd;
+}
+
+body.chant-onefile h2 {
+  text-align: center;
+  padding: 1.5em;
+  margin: 2em 0 1em;
+  font-size: 1.4em;
+  background-color: #ddd;
+}
+
+body.chant-onefile h3 {
+  font-size: 1.3em;
+  font-weight: 500;
+}

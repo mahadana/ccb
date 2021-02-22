@@ -1,0 +1,108 @@
+ambiguousWords:
+  dhamma: 1
+  dhammo: 1
+  dukkha: 1
+  buddha: 1
+  buddho: 1
+  sangha: 1
+  sangho: 1
+  version: 1
+  yo: 1
+
+paliWords:
+  ama: 1
+  anatt: 1
+  anatta: 1
+  anatto: 1
+  anicca: 1
+  annam: 1
+  anta: 1
+  ayam: 1
+  bhagavat: 1
+  bhagavata: 1
+  bhagavato: 1
+  ca: 1
+  danta: 1
+  dve: 1
+  hi: 1
+  hoti: 1
+  iva: 1
+  jatipi: 1
+  jarapi: 1
+  kayo: 1
+  loma: 1
+  maya: 1
+  na: 1
+  natthi: 1
+  sa: 1
+  saranam: 1
+  sadhu: 1
+  sutta: 1
+  taco: 1
+  tam: 1
+  tanha: 1
+  te: 1
+  va: 1
+  vasa: 1
+  vedana: 1
+  yam: 1
+  yayam: 1
+  yo: 1
+
+asideMatchers:
+  - "After bowing.+"
+  - "An alternative version of the.+"
+  - "At this time.+"
+  - "Bow three.+"
+  - "Bow"
+  - "Bowing"
+  - "Chanting and making.+"
+  - "Leader:"
+  - "One person:"
+  - "Repeat each.+"
+  - "Repeat, after.+"
+  - "Response:"
+  - "Solo introduction"
+  - "The following is chanted only.+"
+  - "Three times"
+  - "Version One"
+  - "Version Two"
+
+header: |2
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>%TITLE%</title>
+      <meta name="copyright" content="Amaravati Buddhist Monastery" />
+      <!-- License: Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported
+                    https://creativecommons.org/licenses/by-nc-nd/3.0/ -->
+      <link href="style.css" rel="stylesheet" />
+    </head>
+    <body>
+
+footer: |2
+    </body>
+  </html>
+
+volumes:
+  - title: Chanting Book · Volume One
+    subTitle: Morning and Evening Chanting (Pūjā) and Reflections
+  - title: Chanting Book · Volume Two
+    subTitle: Suttas, Parittas and Funeral Chanting
+
+pageOffsets:
+  ccb-1.2.1.1: -1
+  ccb-1.2.1.2: -1
+  ccb-1.2.1.3: -1
+  ccb-1.2.1.4: -1
+  ccb-1.2.1.5: -1
+  ccb-1.2.1.6: -1
+  ccb-1.2.1.7: -1
+  ccb-1.2.1.8: -1
+  ccb-1.2.1.9: -1
+  ccb-1.3.1.1: -1
+  ccb-1.3.3.1: -1
+  ccb-1.3.4.1: -1
+  ccb-1.3.5.1: -1
