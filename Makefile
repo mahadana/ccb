@@ -81,7 +81,7 @@ $(DIST_STYLE): $(SRC_STYLE)
 
 $(PRE_DIR)/%.html: $(CB_DIR)/main-en-vol%.tex $(PANDOC_BIN)
 	@mkdir -p $(PRE_DIR)
-	cd $(CB_DIR) && $(abspath PANDOC_BIN) $(abspath $<) -o $(abspath $@)
+	cd $(CB_DIR) && $(abspath $(PANDOC_BIN)) $(abspath $<) -o $(abspath $@)
 
 $(PRE_DIR)/1.toc: $(CB_DIR)/pdf/Chanting-Book-EN-Vol-1-Web-2015-09-16.pdf
 	@mkdir -p $(PRE_DIR)
