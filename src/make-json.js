@@ -224,6 +224,8 @@ const convertChant = (
         }
       } else if ((match = line.match(/^<!-- lng:(?<lng>.+) -->$/))) {
         groupLng = match.groups.lng;
+      } else if (line.match(/^<\/?div/)) {
+        // Ignore divs...
       } else if (line === "<p>" && !inGroup) {
         pushGroup();
         inGroup = true;
@@ -231,7 +233,11 @@ const convertChant = (
         popGroup();
         inGroup = false;
       } else if ((match = line.match(lineRegex))) {
-        const { tag, unnumbered, inner, end, br } = match.groups;
+        let { tag, unnumbered, inner, end, br } = match.groups;
+        if (tag === 'u') {
+          inner = '<u>' + inner;
+          tag = undefined;
+        }
         // These are to remove curly quotes, but it seems better to
         // leave them in as there are a lot of subtle rules regarding
         // which ones to use...

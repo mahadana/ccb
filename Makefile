@@ -2,6 +2,8 @@ CB_GIT_URL   := https://github.com/profound-labs/community-chanting-book.git
 CB_GIT_HASH  := f67b543b3314d7dad38e1d59ce4e945bfb7e6dff
 WORDS_GIT_URL := https://github.com/dwyl/english-words.git
 WORDS_GIT_HASH := 11735d0d68f051b817ad224e14d999acc94fcf00
+PANDOC_VERSION := 2.11.4
+PANDOC_URL   := https://github.com/jgm/pandoc/releases/download/$(PANDOC_VERSION)/pandoc-$(PANDOC_VERSION)-linux-amd64.tar.gz
 
 DIST_DIR     := dist
 SRC_DIR      := src
@@ -9,8 +11,10 @@ TMP_DIR      := .tmp
 CB_DIR       := $(TMP_DIR)/cb
 PRE_DIR      := $(TMP_DIR)/pre
 WORDS_DIR    := $(TMP_DIR)/words
+PANDOC_DIR   := $(TMP_DIR)/pandoc
 
 WORDS_DICT   := $(WORDS_DIR)/words_dictionary.json
+PANDOC_BIN   := $(PANDOC_DIR)/pandoc
 CB_DEPS      := $(CB_DIR)/main-en-vol1.tex $(CB_DIR)/main-en-vol2.tex
 HTML_DEPS    := $(PRE_DIR)/1.html $(PRE_DIR)/2.html
 TOC_DEPS     := $(PRE_DIR)/1.toc $(PRE_DIR)/2.toc
@@ -72,12 +76,12 @@ $(DIST_DIR)/fonts/%: $$(wildcard $$(CB_DIR)/fonts/$$(basename %).*)
 	@rm -f $(@D)/$(<F)
 
 $(DIST_STYLE): $(SRC_STYLE)
-	@mkdir -p $(dir $@)
+	@mkdir -p $(@D)
 	cp -f $< $@
 
-$(PRE_DIR)/%.html: $(CB_DIR)/main-en-vol%.tex
+$(PRE_DIR)/%.html: $(CB_DIR)/main-en-vol%.tex $(PANDOC_BIN)
 	@mkdir -p $(PRE_DIR)
-	cd $(CB_DIR) && pandoc $(abspath $<) -o $(abspath $@)
+	cd $(CB_DIR) && $(abspath PANDOC_BIN) $(abspath $<) -o $(abspath $@)
 
 $(PRE_DIR)/1.toc: $(CB_DIR)/pdf/Chanting-Book-EN-Vol-1-Web-2015-09-16.pdf
 	@mkdir -p $(PRE_DIR)
@@ -94,6 +98,13 @@ $(CB_DEPS): $(CB_DIR) $(SRC_PREPROC)
 
 $(CB_DIR):
 	test -d $@ || git clone $(CB_GIT_URL) $(CB_DIR)
+	@touch $@
+
+$(PANDOC_BIN):
+	@mkdir -p $(@D)
+	cd $(PANDOC_DIR) && curl -Ls $(PANDOC_URL) | \
+		tar zxv --strip-components=2 \
+		pandoc-$(PANDOC_VERSION)/bin/pandoc
 	@touch $@
 
 $(WORDS_DICT): $(WORDS_DIR)

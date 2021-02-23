@@ -18,10 +18,12 @@ Domain].
 
 ## Build
 
+The build toolchains assumes a Debian-like system running on Linux amd64.
+
 ```sh
-sudo apt-get install -y nodejs npm # or whatever you prefer...
+sudo apt-get install -y nodejs npm # or as you see fit...
 sudo apt-get install -y \
-  git make mupdf-tools pandoc perl woff-tools woff2 \
+  curl git make mupdf-tools perl woff-tools woff2 \
   texlive texlive-fonts-extra texlive-latex-extra texlive-luatex
 git clone https://github.com/mahadana/ccb-html-json.git
 cd ccb-html-json
