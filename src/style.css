@@ -65,15 +65,21 @@ chant h6 {
   letter-spacing: 0.01em;
 }
 
+chant h1 {
+  font-size: 1.3em;
+}
+
 chant h1,
 chant h2,
 chant h3 {
+  font-weight: 500;
   padding-bottom: 0.1em;
   border-bottom: 1px solid #aaa;
 }
 
 chant h2,
 chant h3 {
+  font-size: 1.1em;
   margin-top: 2em;
 }
 
@@ -168,5 +174,4 @@ body.chant-onefile h2 {
 
 body.chant-onefile h3 {
   font-size: 1.3em;
-  font-weight: 500;
 }
