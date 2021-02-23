@@ -31,17 +31,10 @@ const main = async () => {
       .trim()
   );
 
-  push(2, `<h1>Community Chanting Book</h1>`);
-  push(2, `<h2>`);
-  push(3, `Everything in one file`);
-  push(3, `[<a href="ccb.html">html</a>]`);
-  push(3, `[<a href="ccb.json">json</a>]`);
-  push(2, `</h2>`);
-
   toc.forEach((tocVolume) => {
-    push(2, `<h3>${_.escape(tocVolume.title)}</h3>`);
+    push(2, `<h1>${_.escape(tocVolume.title)}</h1>`);
     tocVolume.parts.forEach((tocPart) => {
-      push(2, `<h4>${_.escape(tocPart.title)}</h4>`);
+      push(2, `<h2>${_.escape(tocPart.title)}</h2>`);
       push(2, `<ul>`);
       tocPart.chants.forEach((tocChant) => {
         push(3, `<li>`);
@@ -53,6 +46,14 @@ const main = async () => {
       push(2, `</ul>`);
     });
   });
+
+  push(2, `<ul>`);
+  push(3, `<li>`);
+  push(4, `Everything in one file`);
+  push(4, `[<a href="ccb.html">html</a>]`);
+  push(4, `[<a href="ccb.json">json</a>]`);
+  push(3, `</li>`);
+  push(2, `</ul>`);
 
   const year = new Date().getFullYear();
   push(2, `<p class="copyright">Copyright © ${config.copyright} ${year}</p>`);

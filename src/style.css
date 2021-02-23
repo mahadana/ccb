@@ -66,22 +66,29 @@ chant h6 {
 }
 
 chant h1 {
-  font-size: 1.3em;
+  margin: 1em 0;
+  font-size: 1.6em;
+  font-weight: 300;
 }
 
-chant h1,
-chant h2,
-chant h3 {
-  font-weight: 500;
+chant h2 {
+  margin: 1em 0;
   padding-bottom: 0.1em;
+  font-size: 1.4em;
+  font-weight: 500;
   border-bottom: 1px solid #aaa;
 }
 
-chant h2,
 chant h3 {
+  margin: 1em 0 0.25em;
   font-size: 1.1em;
-  font-weight: 400;
-  margin-top: 2em;
+  font-weight: 500;
+}
+
+chant h4 {
+  margin: 1em 0 0.25em;
+  font-size: 1em;
+  font-weight: 500;
 }
 
 chant group,
@@ -174,30 +181,59 @@ chant aside:after {
   content: " ]";
 }
 
+chant.chant-raw table {
+  margin: 0 auto;
+}
+
+chant.chant-raw table td:not(:last-child) {
+  padding-right: 0.1em;
+}
+
+chant.chant-raw dt {
+  font-weight: bold;
+}
+
+body.chant-onefile h2,
+body.chant-onefile h3,
+body.chant-onefile h4,
+body.chant-onefile h5,
+body.chant-onefile h6 {
+  font-family: "Ubuntu";
+  letter-spacing: 0.01em;
+}
+
 body.chant-onefile h1 {
   text-align: center;
-  padding: 1.5em;
+  padding: 1em;
   margin: 2em 0 1em;
   font-size: 1.7em;
   background-color: #ddd;
 }
 
 body.chant-onefile h2 {
-  text-align: center;
-  padding: 1.5em;
-  margin: 2em 0 1em;
-  font-size: 1.4em;
-  background-color: #ddd;
+  margin: 1em 0;
+  font-size: 1.6em;
+  font-weight: 300;
 }
 
 body.chant-onefile h3 {
-  font-size: 1.3em;
-  font-weight: 400;
+  margin: 1em 0;
+  padding-bottom: 0.1em;
+  font-size: 1.4em;
+  font-weight: 500;
+  border-bottom: 1px solid #aaa;
 }
 
 body.chant-onefile h4 {
+  margin: 1em 0 0.25em;
   font-size: 1.1em;
-  font-weight: 400;
+  font-weight: 500;
+}
+
+body.chant-onefile h5 {
+  margin: 1em 0 0.25em;
+  font-size: 1em;
+  font-weight: 500;
 }
 
 .copyright {

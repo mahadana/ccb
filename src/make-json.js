@@ -72,6 +72,12 @@ const convertTables = (html, { stripTables = false } = {}) => {
     .join("\n");
 };
 
+const getVolumePartFromId = (id) =>
+  id
+    .match(/^ccb-(\d)\.(\d)/)
+    .slice(1, 3)
+    .map((s) => parseInt(s));
+
 const cleanUpHtml = (html) =>
   html
     .replace(/<span class="underline">([^\/]+)<\/span>/g, "<u>$1</u>")
@@ -96,12 +102,9 @@ const convertChant = (
   let firstHeading = true;
   let inAside = false;
   let inGroup = false;
-  let title, match;
+  let match;
 
-  const [volume, part] = id
-    .match(/^ccb-(\d)\.(\d)/)
-    .slice(1, 3)
-    .map((s) => parseInt(s));
+  const [volume, part] = getVolumePartFromId(id);
   let current = {
     copyright: config.copyright,
     license: config.license,
@@ -266,7 +269,6 @@ const convertChant = (
           let hTag;
           if (firstHeading) {
             firstHeading = false;
-            title = unTitle;
             hTag = "h1";
           } else {
             hTag = "h2";
@@ -410,10 +412,39 @@ const tweakChant = (chant) => {
   }
 };
 
-const convert = async (html, { id = "", lng = "mixed", ...options } = {}) => {
+const convertRaw = (html, { id, lng }) => {
+  const [volume, part] = getVolumePartFromId(id);
+  const raw = {
+    copyright: config.copyright,
+    license: config.license,
+    volume,
+    part,
+    id,
+    type: "raw",
+    lang: lng,
+    title: null,
+    html: "",
+  };
+  const lines = html
+    .replace(/<([a-z0-9]+)( [^>]*)>/gi, "<$1>")
+    .replace(/<\/?div>/gi, "")
+    .replace(/<p>(&amp;|<span>2<\/span>|<br>\n)<\/p>/gi, "")
+    .trim()
+    .split(/\n+/);
+  raw.title = lines.shift().match(/^<[^>]+>(.+)</i)[1];
+  raw.html = lines.join("\n");
+  return raw;
+};
+
+const convert = async (html, { id, lng = "mixed", type, ...options } = {}) => {
   id = `ccb-${id}`;
-  const chant = tweakChant(convertChant(html, { ...options, id, lng }));
-  await writeJson(`${JSON_DIR}/${id}.json`, chant);
+  let data;
+  if (type === "raw") {
+    data = convertRaw(html, { id, lng });
+  } else {
+    data = tweakChant(convertChant(html, { ...options, id, lng }));
+  }
+  await writeJson(`${JSON_DIR}/${id}.json`, data);
 };
 
 const split = (text, regex) => {
@@ -564,6 +595,11 @@ const main = async () => {
     });
     index++;
   }
+
+  htmls = split(book2[4].replace(/<h1.+<\/h1>\n/, ""), /^<h2/);
+  await convert(htmls[0], { type: "raw", id: "2.4.1", lng: "en" });
+  htmls[1] = split(htmls[1], /^<p><span> We/)[0];
+  await convert(htmls[1], { type: "raw", id: "2.4.2", lng: "en" });
 };
 
 main().catch((error) => {

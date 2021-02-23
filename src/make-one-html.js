@@ -22,14 +22,15 @@ const extractBody = (html) => {
       if (stage === 0 && line.match(/<body>/)) {
         stage = 1;
       } else if (stage === 1) {
-        if (line.match(/<\/body>/)) {
+        if (line.match(/^\s*<h1/)) {
+          // Ignore
+        } else if (line.match(/^\s*<\/body>/)) {
           stage = 2;
         } else {
-          line = line
-            .replace(/<h2/, "<h4")
-            .replace(/<\/h2/, "</h4")
-            .replace(/<h1/, "<h3")
-            .replace(/<\/h1/, "</h3");
+          line = line.replace(
+            /(<\/?h)(\d)>/g,
+            (_, start, n) => `${start}${parseInt(n) + 1}>`
+          );
           return line;
         }
       }

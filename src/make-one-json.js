@@ -51,9 +51,7 @@ const getPdfToc = async () => {
           }
           title = title.replace("'", "’").replace(/\b&/, " &");
           const page = parseInt(match[3]) - 8;
-          if (title === "Appendix") {
-            //
-          } else if (type === "part") {
+          if (type === "part") {
             lastPart = { title, page, chants: [], chantMap: {} };
             result.parts.push(lastPart);
             result.partsMap[title] = lastPart;
