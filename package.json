@@ -1,7 +1,7 @@
 {
   "name": "ccb-html-json",
   "private": true,
-  "description": "Reformat the Community Chanting Book into HTML and JSON.",
+  "description": "Community Chanting Books as HTML and JSON",
   "version": "1.0.0",
   "repository": {
     "type": "git",

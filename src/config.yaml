@@ -76,8 +76,7 @@ header: |2
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <title>%TITLE%</title>
       <meta name="copyright" content="Amaravati Buddhist Monastery" />
-      <!-- License: Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported
-                    https://creativecommons.org/licenses/by-nc-nd/3.0/ -->
+      <!-- License: https://creativecommons.org/licenses/by-nc-nd/3.0/ -->
       <link href="style.css" rel="stylesheet" />
     </head>
     <body>
@@ -85,6 +84,9 @@ header: |2
 footer: |2
     </body>
   </html>
+
+copyright: Amaravati Buddhist Monastery
+license: https://creativecommons.org/licenses/by-nc-nd/3.0/
 
 volumes:
   - title: Chanting Book · Volume One

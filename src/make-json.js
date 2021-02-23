@@ -103,6 +103,8 @@ const convertChant = (
     .slice(1, 3)
     .map((s) => parseInt(s));
   let current = {
+    copyright: config.copyright,
+    license: config.license,
     volume,
     part,
     id,
@@ -234,8 +236,8 @@ const convertChant = (
         inGroup = false;
       } else if ((match = line.match(lineRegex))) {
         let { tag, unnumbered, inner, end, br } = match.groups;
-        if (tag === 'u') {
-          inner = '<u>' + inner;
+        if (tag === "u") {
+          inner = "<u>" + inner;
           tag = undefined;
         }
         // These are to remove curly quotes, but it seems better to

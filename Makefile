@@ -34,6 +34,7 @@ DIST_HTML    := $(DIST_DIR)/html/ccb-1.1.1.html
 DIST_1HTML   := $(DIST_DIR)/ccb.html
 DIST_INDEX   := $(DIST_DIR)/index.html
 DIST_STYLE   := $(DIST_DIR)/style.css
+DIST_LICENSE := $(DIST_DIR)/LICENSE
 
 FONTS        := AlegreyaXSansSC-Bold \
 		GentiumIncantation-Italic \
@@ -47,7 +48,7 @@ DIST_FONTS   := $(patsubst %,$(DIST_DIR)/fonts/%.woff,$(FONTS)) \
 .PHONY: all clean
 
 all: $(DIST_JSON) $(DIST_1JSON) $(DIST_HTML) $(DIST_1HTML) $(DIST_INDEX) \
-	$(DIST_STYLE) $(DIST_FONTS)
+	$(DIST_STYLE) $(DIST_LICENSE) $(DIST_FONTS)
 
 $(DIST_INDEX): $(JS_DEPS) $(SRC_MKINDEX) $(DIST_1JSON)
 	npm run make-index
@@ -76,6 +77,10 @@ $(DIST_DIR)/fonts/%: $$(wildcard $$(CB_DIR)/fonts/$$(basename %).*)
 	@rm -f $(@D)/$(<F)
 
 $(DIST_STYLE): $(SRC_STYLE)
+	@mkdir -p $(@D)
+	cp -f $< $@
+
+$(DIST_LICENSE): LICENSE.CC-BY-NC-ND-3.0
 	@mkdir -p $(@D)
 	cp -f $< $@
 

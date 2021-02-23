@@ -175,3 +175,9 @@ body.chant-onefile h2 {
 body.chant-onefile h3 {
   font-size: 1.3em;
 }
+
+.copyright {
+  margin: 4em 0;
+  color: grey;
+  text-align: center;
+}

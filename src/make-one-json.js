@@ -130,10 +130,18 @@ const main = async () => {
   const chants = [];
   for (const { path } of await getSortedPaths(JSON_DIR)) {
     const chant = await readJson(`${JSON_DIR}/${path}`);
+    delete chant.copyright;
+    delete chant.license;
     chants.push(chant);
   }
   const toc = getToc(pdfToc, chants);
-  await writeJson(ONE_JSON_PATH, { toc, chants });
+  const oneJson = {
+    copyright: config.copyright,
+    license: config.license,
+    toc,
+    chants,
+  };
+  await writeJson(ONE_JSON_PATH, oneJson);
 };
 
 main().catch((error) => {

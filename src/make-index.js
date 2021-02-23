@@ -54,6 +54,9 @@ const main = async () => {
     });
   });
 
+  const year = new Date().getFullYear();
+  push(2, `<p class="copyright">Copyright © ${config.copyright} ${year}</p>`);
+
   push(0, config.footer);
 
   await writeFile(INDEX_PATH, result.join("\n") + "\n");

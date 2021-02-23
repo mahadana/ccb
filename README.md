@@ -1,14 +1,13 @@
-# Community Chanting Book as HTML and JSON
+# Community Chanting Books as HTML and JSON
 
-This is the [Community Chanting Book] re-formated into HTML and JSON.
+The [Community Chanting Books] re-formatted into HTML and JSON.
 
 ## License
 
-The reformatted HTML, JSON and fonts are copyrighted by [Amaravati Buddhist
-Monastery] and licensed under [Creative Commons No Derivatives].
+The reformatted HTML and JSON are copyrighted by [Amaravati Publications] and
+licensed under [Creative Commons No Derivatives].
 
-All source code in this repository is licensed as [Creative Commons Public
-Domain].
+Computer source code is released as [Public Domain].
 
 ## Originals
 
@@ -30,7 +29,7 @@ cd ccb-html-json
 make
 ```
 
-[amaravati buddhist monastery]: https://www.amaravati.org/
+[amaravati publications]: https://www.amaravati.org/support/amaravati-publications/
 [community chanting book]: https://github.com/profound-labs/community-chanting-book
 [creative commons no derivatives]: https://creativecommons.org/licenses/by-nc-nd/3.0/
 [creative commons public domain]: https://creativecommons.org/publicdomain/zero/1.0/
