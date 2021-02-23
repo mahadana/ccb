@@ -45,7 +45,7 @@
 
 body {
   margin: 0 auto;
-  max-width: 29.2em;
+  max-width: 30.4em;
   padding: 1em;
   font-family: "Gentium Incantation";
   font-size: 20px;
@@ -80,6 +80,7 @@ chant h3 {
 chant h2,
 chant h3 {
   font-size: 1.1em;
+  font-weight: 400;
   margin-top: 2em;
 }
 
@@ -102,13 +103,20 @@ chant[mixed] group verse[en] {
   font-style: italic;
 }
 
+chant group[leader],
 chant group verse[leader] {
   margin-left: 1.8em;
+  margin-right: 1.8em;
 }
 
 chant grid {
   display: table;
   margin: 1em 0;
+}
+
+chant grid[center] {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 chant grid row {
@@ -148,6 +156,16 @@ chant aside {
   text-indent: -0.6em;
 }
 
+chant aside[center] {
+  margin-left: 1.8em;
+  text-align: center;
+}
+
+chant aside[right] {
+  margin-right: 0;
+  text-align: right;
+}
+
 chant aside:before {
   content: "[ ";
 }
@@ -174,6 +192,12 @@ body.chant-onefile h2 {
 
 body.chant-onefile h3 {
   font-size: 1.3em;
+  font-weight: 400;
+}
+
+body.chant-onefile h4 {
+  font-size: 1.1em;
+  font-weight: 400;
 }
 
 .copyright {

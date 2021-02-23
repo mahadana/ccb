@@ -56,7 +56,6 @@ asideMatchers:
   - "Bow three.+"
   - "Bow"
   - "Bowing"
-  - "Chanting and making.+"
   - "Leader:"
   - "One person:"
   - "Repeat each.+"
@@ -64,7 +63,7 @@ asideMatchers:
   - "Response:"
   - "Solo introduction"
   - "The following is chanted only.+"
-  - "Three times"
+  - "Three times.*"
   - "Version One"
   - "Version Two"
 

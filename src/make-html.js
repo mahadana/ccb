@@ -23,6 +23,8 @@ const makeChantHtml = async (chant) => {
   const nodeOpen = (tag, node) => {
     const attrs = [
       node.lang ? ` ${node.lang}` : "",
+      node.center ? " center" : "",
+      node.right ? " right" : "",
       node.leader ? " leader" : "",
       node.id ? ` id="${node.id}"` : "",
     ].join("");
@@ -63,7 +65,7 @@ const makeChantHtml = async (chant) => {
       push(3, "</grid>");
     } else {
       const tag = node.type[0] === "h" ? "h2" : node.type;
-      push(3, `<${tag}>${node.html}</${tag}>`);
+      push(3, `${nodeOpen(tag, node)}${node.html}</${tag}>`);
     }
   });
 

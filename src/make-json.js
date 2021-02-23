@@ -200,7 +200,8 @@ const convertChant = (
   };
 
   const asideRegex = new RegExp(
-    `^<p>(?<inner>${config.asideMatchers.join("|")})(?<end><\/p>|<br \/>)$`
+    `^<p>(?<inner>${config.asideMatchers.join("|")})(?<end><\/p>|<br \/>)$`,
+    "i"
   );
   const lineRegex = /^(?:<(?:(?!span)(?<tag>[^ >]+))(?<unnumbered> class="unnumbered")?[^>]*>)?(?<inner>.+)<(?:\/(?<end>[^>]+)|(?<br>br) \/)>$/;
 
@@ -326,9 +327,91 @@ const convertChant = (
   return current;
 };
 
+const addAttribute = (node, name, value) => {
+  const html = node.html;
+  const children = node.children;
+  delete node.html;
+  delete node.children;
+  node[name] = value;
+  node.html = html;
+  node.children = children;
+};
+
+const asideAlign = (chant, dir) => {
+  chant.children.forEach((node) => {
+    if (node.type === "aside") {
+      addAttribute(node, dir, true);
+    }
+  });
+  return chant;
+};
+
+const gridAlign = (chant, dir) => {
+  chant.children.forEach((node) => {
+    if (node.type === "grid") {
+      addAttribute(node, dir, true);
+    }
+  });
+  return chant;
+};
+
+const tweakChant = (chant) => {
+  switch (chant.id) {
+    case "ccb-1.1.1":
+    case "ccb-1.1.2":
+    case "ccb-1.1.3":
+    case "ccb-1.1.4":
+    case "ccb-1.1.5":
+    case "ccb-1.1.7":
+    case "ccb-1.2.1.1":
+    case "ccb-1.2.1.2":
+    case "ccb-1.2.2.1":
+    case "ccb-1.2.2.2":
+    case "ccb-2.2.1":
+    case "ccb-2.2.17":
+      return asideAlign(chant, "right");
+    case "ccb-1.3.12": {
+      const [extra] = chant.children.splice(6, 1);
+      console.log(extra);
+      extra.children.forEach((node) => chant.children[5].children.push(node));
+      return gridAlign(chant, "center");
+    }
+    case "ccb-2.1.1.1":
+    case "ccb-2.1.2.1":
+    case "ccb-2.1.3.1": {
+      chant = asideAlign(chant, "center");
+      const extra = chant.children.splice(2, 3);
+      chant.children[1].leader = true;
+      extra.forEach((node) =>
+        node.children.forEach((node) => chant.children[1].children.push(node))
+      );
+      return chant;
+    }
+    case "ccb-2.1.1.2":
+    case "ccb-2.1.2.2":
+    case "ccb-2.1.3.2":
+      return gridAlign(asideAlign(chant, "center"), "center");
+    case "ccb-2.2.25.1": {
+      const group = chant.children[1];
+      addAttribute(group, "leader", true);
+      group.children[0].html += " " + group.children[1].html;
+      group.children.splice(1, 1);
+      group.children[1].html += " " + group.children[2].html;
+      group.children.splice(2, 1);
+      return asideAlign(chant, "center");
+    }
+    case "ccb-2.2.25.2": {
+      addAttribute(chant.children[1], "center", true);
+      return asideAlign(chant, "center");
+    }
+    default:
+      return chant;
+  }
+};
+
 const convert = async (html, { id = "", lng = "mixed", ...options } = {}) => {
   id = `ccb-${id}`;
-  const chant = convertChant(html, { ...options, id, lng });
+  const chant = tweakChant(convertChant(html, { ...options, id, lng }));
   await writeJson(`${JSON_DIR}/${id}.json`, chant);
 };
 
@@ -417,7 +500,7 @@ const main = async () => {
   for (const html of htmls) {
     await convert(html, {
       id: `1.4.${index}`,
-      lng: "mixed",
+      lng: index >= 2 ? "mixed" : "en",
       splitParts: index > 3,
       stripTables: index == 3,
     });
