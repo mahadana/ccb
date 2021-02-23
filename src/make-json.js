@@ -372,7 +372,6 @@ const tweakChant = (chant) => {
       return asideAlign(chant, "right");
     case "ccb-1.3.12": {
       const [extra] = chant.children.splice(6, 1);
-      console.log(extra);
       extra.children.forEach((node) => chant.children[5].children.push(node));
       return gridAlign(chant, "center");
     }
