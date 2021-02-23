@@ -365,8 +365,10 @@ const tweakChant = (chant) => {
     case "ccb-1.1.7":
     case "ccb-1.2.1.1":
     case "ccb-1.2.1.2":
+    case "ccb-1.2.1.9":
     case "ccb-1.2.2.1":
     case "ccb-1.2.2.2":
+    case "ccb-1.2.2.9":
     case "ccb-2.2.1":
     case "ccb-2.2.17":
       return asideAlign(chant, "right");
