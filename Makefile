@@ -116,7 +116,7 @@ $(WORDS_DIR):
 	@touch $@
 
 node_modules: package.json package-lock.json
-	npm clean-install
+	npm ci
 	@touch $@
 
 clean:
