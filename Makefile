@@ -49,7 +49,7 @@ DIST_FONTS   := $(patsubst %,$(DIST_DIR)/fonts/%.woff,$(FONTS)) \
 all: $(DIST_JSON) $(DIST_1JSON) $(DIST_HTML) $(DIST_1HTML) $(DIST_INDEX) \
 	$(DIST_STYLE) $(DIST_FONTS)
 
-$(DIST_INDEX): $(JS_DEPS) $(SRC_MKINDEX) $(DIST1_JSON)
+$(DIST_INDEX): $(JS_DEPS) $(SRC_MKINDEX) $(DIST_1JSON)
 	npm run make-index
 
 $(DIST_1HTML): $(JS_DEPS) $(SRC_MK1HTML) $(DIST_1JSON)

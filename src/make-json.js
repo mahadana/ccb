@@ -411,14 +411,13 @@ const main = async () => {
   }
 
   htmls = split(book1[4].replace(/<h1.+<\/h1>\n/, ""), /^<h2/);
-  htmls.shift(); // Remove Añjali
   index = 1;
   for (const html of htmls) {
     await convert(html, {
       id: `1.4.${index}`,
       lng: "mixed",
-      splitParts: index > 2,
-      stripTables: index == 2,
+      splitParts: index > 3,
+      stripTables: index == 3,
     });
     index++;
   }
