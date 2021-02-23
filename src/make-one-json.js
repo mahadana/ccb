@@ -22,18 +22,34 @@ const getPdfToc = async () => {
   ];
   return pdfTocs.map((pdfToc) => {
     const result = { parts: [], partsMap: {} };
+    let recent, regex;
+    if (pdfToc.trim()[0].match(/\||-/)) {
+      // mupdf 1.17 or later...
+      recent = true;
+      regex = /^([-|])\s+(".+")\s+#(\d+)/;
+    } else {
+      // mupdf 1.14 or prior
+      recent = false;
+      regex = /^(\t)?(.+)\t#(\d+)/;
+    }
     let lastPart;
     pdfToc
       .trim()
       .split("\n")
       .forEach((line) => {
         let match;
-        if ((match = line.match(/^([-|])\s+(".+")\s+#(\d+)/))) {
-          const type = match[1] === "-" ? "part" : "chant";
-          const title = new StringDecoder("utf8")
-            .write(Buffer.from(eval(match[2]), "ascii"))
-            .replace("'", "’")
-            .replace(/\b&/, " &");
+        if ((match = line.match(regex))) {
+          let type, title;
+          if (recent) {
+            type = match[1] === "-" ? "part" : "chant";
+            title = new StringDecoder("utf8").write(
+              Buffer.from(eval(match[2]), "ascii")
+            );
+          } else {
+            type = !match[1] ? "part" : "chant";
+            title = match[2];
+          }
+          title = title.replace("'", "’").replace(/\b&/, " &");
           const page = parseInt(match[3]) - 8;
           if (title === "Appendix") {
             //
