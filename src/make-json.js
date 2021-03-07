@@ -78,8 +78,12 @@ const getVolumePartFromId = (id) =>
     .slice(1, 3)
     .map((s) => parseInt(s));
 
+const cleanupHtmlWhitespace = (html) =>
+  // this is a unicode non-breaking space character
+  html.replace(/&nbsp;/g, " ").replace(/ /g, " ");
+
 const cleanUpHtml = (html) =>
-  html
+  cleanupHtmlWhitespace(html)
     .replace(/<span class="underline">([^\/]+)<\/span>/g, "<u>$1</u>")
     .replace(/<a[^>]*>.+?<\/a>/g, "")
     .replace(/<span>(.*)<\/span>/g, "$1")
@@ -384,7 +388,11 @@ const tweakChant = (chant) => {
     case "ccb-2.1.3.1": {
       chant = asideAlign(chant, "center");
       const extra = chant.children.splice(2, 3);
-      chant.children[1].leader = true;
+      chant.children[1] = {
+        type: "group",
+        leader: true,
+        ...chant.children[1],
+      };
       extra.forEach((node) =>
         node.children.forEach((node) => chant.children[1].children.push(node))
       );
@@ -432,7 +440,7 @@ const convertRaw = (html, { id, lng }) => {
     .trim()
     .split(/\n+/);
   raw.title = lines.shift().match(/^<[^>]+>(.+)</i)[1];
-  raw.html = lines.join("\n");
+  raw.html = cleanupHtmlWhitespace(lines.join("\n"));
   return raw;
 };
 

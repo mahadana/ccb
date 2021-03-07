@@ -20,7 +20,10 @@ const makeChantHtml = async (chant, partTitle) => {
         .join("") + html
     );
 
-  const pushTitle = (level) => {
+  const pushMetaAndTitle = (level) => {
+    push(level, `<chantmeta key="id" value="${chant.id}"></chantmeta>`);
+    push(level, `<chantmeta key="volume" value="${chant.volume}"></chantmeta>`);
+    push(level, `<chantmeta key="part" value="${chant.part}"></chantmeta>`);
     push(level, `<h1>${_.escape(partTitle)}</h1>`);
     push(level, `<h2>${_.escape(chant.title)}</h2>`);
   };
@@ -32,7 +35,6 @@ const makeChantHtml = async (chant, partTitle) => {
       node.center ? " center" : "",
       node.right ? " right" : "",
       node.leader ? " leader" : "",
-      node.id ? ` id="${node.id}"` : "",
     ].join("");
     return `<${tag}${attrs}>`;
   };
@@ -40,8 +42,8 @@ const makeChantHtml = async (chant, partTitle) => {
   const walkNode = (level, node) => {
     if (!_.isNil(node.html)) {
       if (node.type === "raw") {
-        push(level, nodeOpen("chant", node, ` class="chant-raw"`));
-        pushTitle(level + 1);
+        push(level, nodeOpen("chant", node, ` raw`));
+        pushMetaAndTitle(level + 1);
         node.html.split("\n").forEach((line) => push(level + 1, line));
         push(level, "</chant>");
       } else {
@@ -60,7 +62,7 @@ const makeChantHtml = async (chant, partTitle) => {
         push(level, nodeOpen(tag, node) + html + `</${tag}>`);
       } else {
         push(level, nodeOpen(tag, node));
-        if (node.type === "chant") pushTitle(level + 1);
+        if (node.type === "chant") pushMetaAndTitle(level + 1);
         node.children.forEach((node) => walkNode(level + 1, node));
         push(level, `</${tag}>`);
       }
@@ -78,7 +80,7 @@ const makeChantHtml = async (chant, partTitle) => {
   );
   walkNode(2, chant);
   push(0, config.footer);
-  await writeFile(`${HTML_DIR}/${chant.id}.html`, result.join("\n") + "\n");
+  await writeFile(`${HTML_DIR}/${chant.id}.html`, result.join("\n"));
 };
 
 const main = async () => {

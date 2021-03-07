@@ -181,15 +181,15 @@ chant aside:after {
   content: " ]";
 }
 
-chant.chant-raw table {
+chant[raw] table {
   margin: 0 auto;
 }
 
-chant.chant-raw table td:not(:last-child) {
+chant[raw] table td:not(:last-child) {
   padding-right: 0.1em;
 }
 
-chant.chant-raw dt {
+chant[raw] dt {
   font-weight: bold;
 }
 
