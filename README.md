@@ -2,6 +2,8 @@
 
 The [Community Chanting Books] re-formatted into HTML and JSON.
 
+[View / download the HTML and JSON](https://mahadana.github.io/ccb/).
+
 ## Originals
 
 - Community Chanting Book - English - Volume 1 ([PDF](https://raw.githubusercontent.com/profound-labs/community-chanting-book/master/pdf/Chanting-Book-EN-Vol-1-Web-2015-09-16.pdf)) ([Publisher](https://www.amaravati.org/dhamma-books/chanting-book/))
