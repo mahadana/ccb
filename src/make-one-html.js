@@ -73,7 +73,7 @@ const main = async () => {
     tocVolume.parts.forEach((tocPart) => {
       push(2, `<h2>${_.escape(tocPart.title)}</h2>`);
       tocPart.chants.forEach((tocChant) => {
-        push(0, htmls[tocChant.link]);
+        push(0, htmls[tocChant.id]);
       });
     });
   });

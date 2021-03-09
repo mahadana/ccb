@@ -39,8 +39,8 @@ const main = async () => {
       tocPart.chants.forEach((tocChant) => {
         push(3, `<li>`);
         push(4, _.escape(tocChant.title));
-        push(4, `[<a href="html/${tocChant.link}.html">html</a>]`);
-        push(4, `[<a href="json/${tocChant.link}.json">json</a>]`);
+        push(4, `[<a href="html/${tocChant.id}.html">html</a>]`);
+        push(4, `[<a href="json/${tocChant.id}.json">json</a>]`);
         push(3, `</li>`);
       });
       push(2, `</ul>`);

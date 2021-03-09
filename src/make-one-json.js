@@ -96,8 +96,6 @@ const getToc = (pdfToc, chants) =>
           title: pdfTocPart.title,
           part: partIndex,
           page: pdfTocPart.page,
-          chantSet: [],
-          link: chant.id,
           chants: [],
         };
         if (!tocPart.title || !tocPart.page)
@@ -105,12 +103,11 @@ const getToc = (pdfToc, chants) =>
         tocVolume.parts.push(tocPart);
       }
       if (!tocPart || !pdfTocPart) throw new Error(`Unexpected`);
-      tocPart.chantSet.push(chant.id);
       const tocChat = {
         title: chant.title,
         lang: chant.lang,
         page: pdfTocPart.chantMap[chant.title].page,
-        link: chant.id,
+        id: chant.id,
       };
       if (!tocChat.page) throw new Error(`No page ${chant.title}`);
       tocChat.page += config.pageOffsets[chant.id] || 0;
